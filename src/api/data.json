@@ -1,0 +1,120 @@
+{
+  "main": [
+    {
+      "grid": "o-5",
+      "data": {
+        "across": [
+          { "word": "lava", "clue": "Abed's floor'" },
+          {
+            "word": "aldi",
+            "clue": "Premium SB supplier",
+            "details": { "pronoun": true }
+          }
+        ],
+        "down": [
+          { "word": "leela", "clue": "WNT", "details": { "pronoun": true } },
+          { "word": "aioli", "clue": "Fancy a dip?" }
+        ]
+      }
+    },
+    {
+      "grid": "l-5",
+      "data": {
+        "across": [{ "word": "nice", "clue": "Three cheers for nudity" }],
+        "down": [
+          {
+            "word": "sylen",
+            "clue": "Hot tub retreat",
+            "details": { "pronoun": true }
+          }
+        ]
+      }
+    },
+    {
+      "grid": "u-7",
+      "data": {
+        "across": [{ "word": "times", "clue": "East coast newspaper" }],
+        "down": [
+          {
+            "word": "support",
+            "clue": "Often essential when everyday tasks are a struggle"
+          },
+          {
+            "word": "beddays",
+            "clue": "They pass by so quickly",
+            "details": { "mapping": "(3,5)" }
+          }
+        ]
+      }
+    },
+    {
+      "grid": "e-7",
+      "data": {
+        "across": [
+          { "word": "geeks", "clue": "Us" },
+          {
+            "word": "ifear",
+            "clue": "Massacre",
+            "details": { "mapping": "(1,4)" }
+          },
+          {
+            "word": "happy",
+            "clue": "Commonly said in each other's presence"
+          }
+        ],
+        "down": [
+          {
+            "word": "goliath",
+            "clue": "Nurturing her nature is futile",
+            "details": { "pronoun": true }
+          }
+        ]
+      }
+    },
+    {
+      "grid": "i-9",
+      "data": {
+        "across": [
+          {
+            "word": "titsass",
+            "clue": "Toast these before dick",
+            "details": { "mapping": "(4,3)" }
+          },
+          {
+            "word": "tomsage",
+            "clue": "Frequently mocked :'(",
+            "details": { "mapping": "(4,3)" }
+          }
+        ],
+        "down": [
+          {
+            "word": "slumlords",
+            "clue": "Ideal future occupations"
+          }
+        ]
+      }
+    },
+    {
+      "grid": "v-9",
+      "data": {
+        "down": [
+          {
+            "word": "snowdonia",
+            "clue": "Short term goal",
+            "details": { "pronoun": true }
+          },
+          {
+            "word": "australia",
+            "clue": "Long term goal",
+            "details": { "pronoun": true }
+          }
+        ]
+      }
+    }
+  ],
+  "bonus": {
+    "word": "iloveyou",
+    "letter": "y",
+    "details": { "mapping": "(1,4,3)" }
+  }
+}
