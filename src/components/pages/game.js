@@ -24,8 +24,6 @@ const Game = () => {
     bonusUnlocked,
     gameComplete,
   } = useContext(AppContext);
-  const bonusTabBorder = gameComplete ? "border-green" : "border-purple";
-  const bonusTabFill = gameComplete ? "bg-green" : "bg-purple";
   const allWords = useMemo(
     () =>
       main.flatMap((game) => {
@@ -73,21 +71,18 @@ const Game = () => {
               {main.map((game, index) => {
                 let unlocked = index === 0;
                 if (index > 0) unlocked = stage >= index;
-                let tabBorder = "border-lightGrey";
-                let tabFill = "bg-lightGrey";
+                let tabColors = "border-lightGrey bg-lightGrey";
                 if (unlocked) {
-                  tabBorder = "border-yellow";
-                  tabFill = "bg-yellow";
+                  tabColors = "border-yellow bg-yellow";
                 }
                 if (stage > index) {
-                  tabBorder = "border-green";
-                  tabFill = "bg-green";
+                  tabColors = "border-green bg-green";
                 }
 
                 return (
                   <Tab
                     key={game.grid + "tab"}
-                    className={`w-8 h-8 rounded-[50%] flex items-center justify-center ml-1 mr-1 border-solid border-2 ${tabBorder} ${tabFill} text-white font-medium ${
+                    className={`w-8 h-8 rounded-[50%] flex items-center justify-center ml-1 mr-1 border-solid border-2 ${tabColors} text-white font-medium ${
                       unlocked ? "cursor-pointer" : ""
                     }`}
                     disabled={!unlocked}
@@ -100,7 +95,11 @@ const Game = () => {
               })}
               {bonusUnlocked && (
                 <Tab
-                  className={`w-8 h-8 rounded-[50%] flex items-center justify-center ml-1 mr-1 text-white font-medium border-solid border-2 ${bonusTabBorder} ${bonusTabFill} cursor-pointer`}
+                  className={`w-8 h-8 rounded-[50%] flex items-center justify-center ml-1 mr-1 text-white font-medium border-solid border-2 ${
+                    gameComplete
+                      ? "border-green bg-green"
+                      : "border-purple bg-purple"
+                  } cursor-pointer`}
                 >
                   7
                 </Tab>
