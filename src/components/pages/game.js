@@ -21,17 +21,8 @@ const Game = () => {
   const allWords = useMemo(
     () =>
       main.flatMap((game) => {
-        const across = game.data.across;
-        const down = game.data.down;
-        let words = [];
-        if (across)
-          words = [
-            ...words,
-            ...across.map((item) => (item ? item.word : null)),
-          ];
-        if (down)
-          words = [...words, ...down.map((item) => (item ? item.word : null))];
-        return words;
+        const { data } = game;
+        return data.map((item) => (item ? item.word : null));
       }),
     [main]
   );
