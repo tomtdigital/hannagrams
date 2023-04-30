@@ -16,12 +16,12 @@
     {
       "grid": "l-5",
       "data": [
-        { "word": "nice", "clue": "Three cheers for nudity" },
         {
           "word": "sylen",
           "clue": "Hot tub retreat",
           "details": { "pronoun": true }
-        }
+        },
+        { "word": "nice", "clue": "Three cheers for nudity" }
       ]
     },
     {

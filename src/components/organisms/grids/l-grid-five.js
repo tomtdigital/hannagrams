@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-// Map all data to a flat array of all answers- down first, across second
+// Look at data
+// Make keyboard
 // Have individual value for cell stored in state
 // Update guess in useeffect
 
 const LGridFive = ({ active, data, onComplete }) => {
-  const { across, down } = data;
   // All downs then all acrosses
   const wordCells = [
     [0, 4, 8, 12, 16],
