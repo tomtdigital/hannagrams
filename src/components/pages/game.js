@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import jsonData from "../../api/data.json";
 import Grid from "../organisms/grid";
 import Page from "../organisms/page";
@@ -8,8 +8,6 @@ import Bonus from "../organisms/bonus";
 import { useMemo } from "react";
 import Keyboard from "../organisms/keyboard";
 
-// TODO: Create dummy L grid
-// TODO: Create keyboard
 // TODO: Hide all and show message when under a particular height
 // Later
 // TODO: setup localStorage (gameData with guesses + everything in context state)
@@ -17,8 +15,15 @@ import Keyboard from "../organisms/keyboard";
 
 const Game = () => {
   const { main, bonus } = jsonData;
-  const { stage, score, tabIndex, setTabIndex, bonusUnlocked, gameComplete } =
-    useContext(AppContext);
+  const {
+    stage,
+    score,
+    tabIndex,
+    setTabIndex,
+    bonusUnlocked,
+    gameComplete,
+    activeWord,
+  } = useContext(AppContext);
   const allWords = useMemo(
     () =>
       main.flatMap((game) => {
@@ -37,6 +42,11 @@ const Game = () => {
     () => maxScore - averageWordLength * 6,
     [maxScore, averageWordLength]
   );
+  const [cluesRevealed, setCluesRevealed] = useState([]);
+
+  const handleClueReveal = (word) => {
+    setCluesRevealed([...cluesRevealed, word]);
+  };
 
   return (
     <Page>
@@ -108,7 +118,22 @@ const Game = () => {
           </TabPanel>
         )}
       </Tabs>
-      <div className="grid grid-cols-1 h-[calc(40vh-60px)]">
+      <div className="h-[70px] bg-blue mt-[3em]">
+        <div className="text-center">
+          <p className="text-[1.5em]">{activeWord.anagram}</p>
+          {cluesRevealed.includes(activeWord.word) ? (
+            <p className="text-[1em]">{activeWord.clue}</p>
+          ) : (
+            <button
+              className="bg-green"
+              onClick={() => handleClueReveal(activeWord.word)}
+            >
+              Reveal Description
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 grid-rows-3 h-[calc(40vh-60px-70px-3em)]">
         <Keyboard />
       </div>
     </Page>

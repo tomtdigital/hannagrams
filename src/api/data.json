@@ -3,36 +3,53 @@
     {
       "grid": "o-5",
       "data": [
-        { "word": "lava", "clue": "Abed's floor'" },
+        { "anagram": "a v l", "word": "lava", "clue": "Abed's floor'" },
         {
+          "anagram": "d a i l",
           "word": "aldi",
           "clue": "Premium SB supplier",
           "details": { "pronoun": true }
         },
-        { "word": "leela", "clue": "WNT", "details": { "pronoun": true } },
-        { "word": "aioli", "clue": "Fancy a dip?" }
+        {
+          "anagram": "a l e",
+          "word": "leela",
+          "clue": "WNT",
+          "details": { "pronoun": true }
+        },
+        { "anagram": "i a l o", "word": "aioli", "clue": "Fancy a dip?" }
       ]
     },
     {
       "grid": "l-5",
       "data": [
         {
+          "anagram": "y l s e n",
           "word": "sylen",
           "clue": "Hot tub retreat",
           "details": { "pronoun": true }
         },
-        { "word": "nice", "clue": "Three cheers for nudity" }
+        {
+          "anagram": "c e n i",
+          "word": "nice",
+          "clue": "Three cheers for nudity"
+        }
       ]
     },
     {
       "grid": "u-7",
       "data": [
-        { "word": "times", "clue": "East coast newspaper" },
         {
+          "anagram": "s t m e i",
+          "word": "times",
+          "clue": "East coast newspaper"
+        },
+        {
+          "anagram": "p s r u o t",
           "word": "support",
           "clue": "Often essential when everyday tasks are a struggle"
         },
         {
+          "anagram": "s e a b d y",
           "word": "beddays",
           "clue": "They pass by so quickly",
           "details": { "mapping": "(3,5)" }
@@ -42,17 +59,20 @@
     {
       "grid": "e-7",
       "data": [
-        { "word": "geeks", "clue": "Us" },
+        { "anagram": "k e g s", "word": "geeks", "clue": "Us" },
         {
+          "anagram": "e r i a f",
           "word": "ifear",
           "clue": "Massacre",
           "details": { "mapping": "(1,4)" }
         },
         {
+          "anagram": "y a h p",
           "word": "happy",
           "clue": "Commonly said in each other's presence"
         },
         {
+          "anagram": "t a i o g l h",
           "word": "goliath",
           "clue": "Nurturing her nature is futile",
           "details": { "pronoun": true }
@@ -63,16 +83,19 @@
       "grid": "i-9",
       "data": [
         {
+          "anagram": "s a t i",
           "word": "titsass",
           "clue": "Toast these before dick",
           "details": { "mapping": "(4,3)" }
         },
         {
+          "anagram": "a o t m s g e",
           "word": "tomsage",
           "clue": "Frequently mocked :'(",
           "details": { "mapping": "(4,3)" }
         },
         {
+          "anagram": "d s m r l u o",
           "word": "slumlords",
           "clue": "Ideal future occupations"
         }
@@ -82,11 +105,13 @@
       "grid": "v-9",
       "data": [
         {
+          "anagram": "d n o i s w a",
           "word": "snowdonia",
           "clue": "Short term goal",
           "details": { "pronoun": true }
         },
         {
+          "anagram": "l r t u a s i",
           "word": "australia",
           "clue": "Long term goal",
           "details": { "pronoun": true }
@@ -95,6 +120,7 @@
     }
   ],
   "bonus": {
+    "anagram": "v i y u o e l",
     "word": "iloveyou",
     "letter": "y",
     "details": { "mapping": "(1,4,3)" }

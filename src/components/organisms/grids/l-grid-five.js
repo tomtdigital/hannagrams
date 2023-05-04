@@ -23,7 +23,7 @@ const LGridFive = ({ active, data, onComplete }) => {
   const activeCells = wordCells.flatMap((cell) => cell);
   const [toggledWord, setToggledWord] = useState(wordCells[0]);
   const [toggledCell, setToggledCell] = useState(toggledWord[0]);
-  const { keyPressed } = useContext(AppContext);
+  const { keyPressed, setActiveWord } = useContext(AppContext);
 
   const toggleWords = (cell) => {
     // Only do something if its a cell in the game
@@ -58,36 +58,72 @@ const LGridFive = ({ active, data, onComplete }) => {
     toggleWords(cell);
   };
 
+  const getWordLocation = () => {
+    const toggledWordString = JSON.stringify(toggledWord);
+    const wordCellStrings = wordCells.map((cellSet) => JSON.stringify(cellSet));
+    return wordCellStrings.indexOf(toggledWordString);
+  };
+
+  useEffect(() => {
+    setActiveWord(data[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const wordLocation = getWordLocation();
+    setActiveWord(data[wordLocation]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toggledWord]);
+
   useEffect(() => {
     const handleKeyPress = ({ letter: guess }) => {
       const newGrid = grid.map((word) =>
         word.map((letter) =>
-          letter.cell === toggledCell ? { ...letter, guess } : letter
+          letter.cell === toggledCell
+            ? { ...letter, guess: guess === "DEL" ? "" : guess }
+            : letter
         )
       );
       setGrid(newGrid);
       const cellPosition = toggledWord.indexOf(toggledCell);
-      // If at the end of a current word
-      if (cellPosition === toggledWord.length - 1) {
-        const toggledWordString = JSON.stringify(toggledWord);
-        const wordCellStrings = wordCells.map((cellSet) =>
-          JSON.stringify(cellSet)
-        );
-        const wordPosition = wordCellStrings.indexOf(toggledWordString);
-        if (wordPosition === wordCells.length - 1) {
-          setToggledWord(wordCells[0]);
-          setToggledCell(wordCells[0][0]);
-        } else {
-          const newWord = wordCells[wordPosition + 1];
-          setToggledWord(newWord);
-          if (newWord[0] === toggledCell) {
-            setToggledCell(newWord[1]);
+      const wordLocation = getWordLocation();
+
+      if (guess === "DEL") {
+        if (cellPosition === 0) {
+          console.log(wordLocation);
+          if (wordLocation === 0) {
+            const lastWord = wordCells[wordCells.length - 1];
+            setToggledWord(lastWord);
+            setToggledCell(lastWord[lastWord.length - 1]);
           } else {
-            setToggledCell(newWord[0]);
+            const newWord = wordCells[wordLocation - 1];
+            setToggledWord(newWord);
+            if (newWord[newWord.length - 1] === toggledCell) {
+              setToggledCell(newWord[newWord.length - 2]);
+            } else {
+              setToggledCell(newWord[newWord.length - 1]);
+            }
           }
+        } else {
+          setToggledCell(toggledWord[cellPosition - 1]);
         }
       } else {
-        setToggledCell(toggledWord[cellPosition + 1]);
+        if (cellPosition === toggledWord.length - 1) {
+          if (wordLocation === wordCells.length - 1) {
+            setToggledWord(wordCells[0]);
+            setToggledCell(wordCells[0][0]);
+          } else {
+            const newWord = wordCells[wordLocation + 1];
+            setToggledWord(newWord);
+            if (newWord[0] === toggledCell) {
+              setToggledCell(newWord[1]);
+            } else {
+              setToggledCell(newWord[0]);
+            }
+          }
+        } else {
+          setToggledCell(toggledWord[cellPosition + 1]);
+        }
       }
     };
 
@@ -105,8 +141,8 @@ const LGridFive = ({ active, data, onComplete }) => {
   }, [grid, onComplete]);
 
   return (
-    <div className="flex justify-center">
-      <div className="grid grid-cols-4 w-[calc(60vh-104px-12%)] min-h-[calc(60vh-104px)]">
+    <div className="flex justify-center h-[calc(60vh-104px)]">
+      <div className="grid grid-cols-4 grid-rows-5 w-[calc(60vh-104px-12%)]">
         {[...Array(20)].map((_, index) => {
           let background;
           let text;

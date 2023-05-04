@@ -8,6 +8,7 @@ const ContextProvider = ({ children }) => {
   const [keyPressed, setKeyPressed] = useState("");
   const [bonusUnlocked, setBonusUnlocked] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
+  const [activeWord, setActiveWord] = useState({});
 
   return (
     <AppContext.Provider
@@ -24,6 +25,8 @@ const ContextProvider = ({ children }) => {
         setGameComplete,
         keyPressed,
         setKeyPressed,
+        activeWord,
+        setActiveWord,
       }}
     >
       {children}
