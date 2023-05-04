@@ -108,7 +108,7 @@ const Game = () => {
           </TabPanel>
         )}
       </Tabs>
-      <div className="grid grid-cols-1 h-[calc(40vh-60px)] border-solid border-red border-2">
+      <div className="grid grid-cols-1 h-[calc(40vh-60px)]">
         <Keyboard />
       </div>
     </Page>
