@@ -6,6 +6,7 @@ import { AppContext } from "../utils/app-context";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Bonus from "../organisms/bonus";
 import { useMemo } from "react";
+import Keyboard from "../organisms/keyboard";
 
 // TODO: Create dummy L grid
 // TODO: Create keyboard
@@ -107,7 +108,9 @@ const Game = () => {
           </TabPanel>
         )}
       </Tabs>
-      <div className="min-h-[50vh]">Keyboard</div>
+      <div className="grid grid-cols-1 h-[calc(40vh-60px)] border-solid border-red border-2">
+        <Keyboard />
+      </div>
     </Page>
   );
 };

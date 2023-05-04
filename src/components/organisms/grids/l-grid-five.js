@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../utils/app-context";
 
 // Look at data
 // Make keyboard
@@ -14,6 +15,7 @@ const LGridFive = ({ active, data, onComplete }) => {
   const activeCells = wordCells.flatMap((cell) => cell);
   const [toggledWord, setToggledWord] = useState(wordCells[0]);
   const [toggledCell, setToggledCell] = useState(toggledWord[0]);
+  console.log(data);
 
   const toggleWords = (cell) => {
     // Only do something if its a cell in the game
@@ -48,9 +50,16 @@ const LGridFive = ({ active, data, onComplete }) => {
     toggleWords(cell);
   };
 
+  const { keyPressed } = useContext(AppContext);
+
+  useEffect(() => {
+    const handleKeyPress = () => {};
+    handleKeyPress(keyPressed);
+  }, [keyPressed]);
+
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-4 w-[calc(50vh-104px-15%)] h-[calc(50vh-104px)]">
+      <div className="grid grid-cols-4 w-[calc(60vh-104px-12%)] h-[calc(60vh-104px)]">
         {[...Array(20)].map((_, index) => {
           let background;
           if (activeCells.includes(index)) background = "bg-yellow";
