@@ -21,8 +21,8 @@ const LGridFive = ({ active, data, onComplete }) => {
   const [grid, setGrid] = useState(baseGrid);
   const wordCells = baseGrid.map((word) => word.map((letter) => letter.cell));
   const activeCells = wordCells.flatMap((cell) => cell);
-  const [toggledLine, setToggledLine] = useState(wordCells[0]);
-  const [toggledCell, setToggledCell] = useState(toggledLine[0]);
+  const [toggledWord, setToggledWord] = useState(wordCells[0]);
+  const [toggledCell, setToggledCell] = useState(toggledWord[0]);
   const { keyPressed } = useContext(AppContext);
 
   const toggleWords = (cell) => {
@@ -32,23 +32,23 @@ const LGridFive = ({ active, data, onComplete }) => {
       const possibleToggles = wordCells.filter((word) => word.includes(cell));
       // Just toggle the word if there is only one word to choose from
       if (possibleToggles.length === 1) {
-        setToggledLine(possibleToggles[0]);
+        setToggledWord(possibleToggles[0]);
       } else {
         // If there is more than one word to toggle...
         const possibleTogglesString = possibleToggles.map((word) =>
           JSON.stringify(word)
         );
-        const toggledLineString = JSON.stringify(toggledLine);
-        const startingIndex = possibleTogglesString.indexOf(toggledLineString);
+        const toggledWordString = JSON.stringify(toggledWord);
+        const startingIndex = possibleTogglesString.indexOf(toggledWordString);
         // ...and the currently toggled word isnt a possiblility for toggling, toggle the first available word.
         //  Do the same if the word is included but the loop needs to start over
         if (
           startingIndex === -1 ||
           startingIndex === possibleToggles.length - 1
         ) {
-          setToggledLine(possibleToggles[0]);
+          setToggledWord(possibleToggles[0]);
         } else {
-          setToggledLine(possibleToggles[startingIndex + 1]);
+          setToggledWord(possibleToggles[startingIndex + 1]);
         }
       }
     }
@@ -66,9 +66,32 @@ const LGridFive = ({ active, data, onComplete }) => {
         )
       );
       setGrid(newGrid);
+      const cellPosition = toggledWord.indexOf(toggledCell);
+      // If at the end of a current word
+      if (cellPosition === toggledWord.length - 1) {
+        const toggledWordString = JSON.stringify(toggledWord);
+        const wordCellStrings = wordCells.map((cellSet) =>
+          JSON.stringify(cellSet)
+        );
+        const wordPosition = wordCellStrings.indexOf(toggledWordString);
+        if (wordPosition === wordCells.length - 1) {
+          setToggledWord(wordCells[0]);
+          setToggledCell(wordCells[0][0]);
+        } else {
+          const newWord = wordCells[wordPosition + 1];
+          setToggledWord(newWord);
+          if (newWord[0] === toggledCell) {
+            setToggledCell(newWord[1]);
+          } else {
+            setToggledCell(newWord[0]);
+          }
+        }
+      } else {
+        setToggledCell(toggledWord[cellPosition + 1]);
+      }
     };
 
-    handleKeyPress(keyPressed);
+    if (keyPressed) handleKeyPress(keyPressed);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyPressed]);
 
@@ -91,7 +114,7 @@ const LGridFive = ({ active, data, onComplete }) => {
             background = "bg-yellow";
             text = "text-black";
           }
-          if (toggledLine.includes(index)) {
+          if (toggledWord.includes(index)) {
             background = "bg-purple";
             text = "text-white";
           }
