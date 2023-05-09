@@ -1,4 +1,4 @@
-const EGridSeven = ({ active, data, onComplete }) => {
+const EGridSeven = ({ data, round, active, onComplete }) => {
   const name = "EGridSeven";
   return (
     <>
@@ -6,7 +6,6 @@ const EGridSeven = ({ active, data, onComplete }) => {
       <button
         className="bg-purple p-2 rounded-md text-white font-medium min-w-fit"
         onClick={onComplete}
-        disabled={!active}
       >
         Complete
       </button>

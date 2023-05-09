@@ -1,4 +1,4 @@
-const VGridNine = ({ active, data, onComplete }) => {
+const VGridNine = ({ data, round, active, onComplete }) => {
   const name = "VGridNine";
   return (
     <>
@@ -6,7 +6,6 @@ const VGridNine = ({ active, data, onComplete }) => {
       <button
         className="bg-purple p-2 rounded-md text-white font-medium min-w-fit"
         onClick={onComplete}
-        disabled={!active}
       >
         Complete
       </button>

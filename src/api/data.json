@@ -1,6 +1,22 @@
 {
   "main": [
     {
+      "grid": "l-5",
+      "data": [
+        {
+          "anagram": "y l s e n",
+          "word": "sylen",
+          "clue": "Hot tub retreat",
+          "details": { "pronoun": true }
+        },
+        {
+          "anagram": "c e n i",
+          "word": "nice",
+          "clue": "Three cheers for nudity"
+        }
+      ]
+    },
+    {
       "grid": "o-5",
       "data": [
         { "anagram": "a v l", "word": "lava", "clue": "Abed's floor'" },
@@ -17,22 +33,6 @@
           "details": { "pronoun": true }
         },
         { "anagram": "i a l o", "word": "aioli", "clue": "Fancy a dip?" }
-      ]
-    },
-    {
-      "grid": "l-5",
-      "data": [
-        {
-          "anagram": "y l s e n",
-          "word": "sylen",
-          "clue": "Hot tub retreat",
-          "details": { "pronoun": true }
-        },
-        {
-          "anagram": "c e n i",
-          "word": "nice",
-          "clue": "Three cheers for nudity"
-        }
       ]
     },
     {

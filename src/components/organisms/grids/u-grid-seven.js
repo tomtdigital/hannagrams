@@ -1,4 +1,4 @@
-const UGridSeven = ({ active, data, onComplete }) => {
+const UGridSeven = ({ data, round, active, onComplete }) => {
   const name = "UGridSeven";
   return (
     <>
@@ -6,7 +6,6 @@ const UGridSeven = ({ active, data, onComplete }) => {
       <button
         className="bg-purple p-2 rounded-md text-white font-medium min-w-fit"
         onClick={onComplete}
-        disabled={!active}
       >
         Complete
       </button>

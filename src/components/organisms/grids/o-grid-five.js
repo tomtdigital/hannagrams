@@ -1,7 +1,7 @@
 // Reminder- set score as you go
 // Reminder- set clues used as you go
 
-const OGridFive = ({ active, data, onComplete }) => {
+const OGridFive = ({ data, round, active, onComplete }) => {
   const name = "OGridFive";
   return (
     <>
@@ -9,7 +9,6 @@ const OGridFive = ({ active, data, onComplete }) => {
       <button
         className="bg-purple p-2 rounded-md text-white font-medium min-w-fit"
         onClick={onComplete}
-        disabled={!active}
       >
         Complete
       </button>

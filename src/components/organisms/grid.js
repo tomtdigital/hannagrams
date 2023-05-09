@@ -7,7 +7,7 @@ import OGridFive from "./grids/o-grid-five";
 import UGridSeven from "./grids/u-grid-seven";
 import VGridNine from "./grids/v-grid-nine";
 
-const Grid = ({ type, active, data, bonusScore }) => {
+const Grid = ({ type, round, active, data, bonusScore }) => {
   const {
     tabIndex,
     setTabIndex,
@@ -16,11 +16,13 @@ const Grid = ({ type, active, data, bonusScore }) => {
     cluesRevealed,
     score,
     setScore,
+    finishedGrids,
+    setFinishedGrids,
     setBonusUnlocked,
     setGameComplete,
   } = useContext(AppContext);
 
-  const onComplete = () => {
+  const onComplete = (stageGrid) => {
     // Calculate/set score
     const wordsAvailable = data.map((item) => item.word);
     let toAdd = 0;
@@ -33,8 +35,11 @@ const Grid = ({ type, active, data, bonusScore }) => {
         toAdd += word.length * 3;
       }
     }
-
     setScore(score + toAdd);
+
+    // Save grid
+    setFinishedGrids([...finishedGrids, stageGrid]);
+
     // Advance game
     if (stage === 5) {
       if (score >= bonusScore) {
@@ -52,17 +57,59 @@ const Grid = ({ type, active, data, bonusScore }) => {
 
   switch (type) {
     case "l-5":
-      return <LGridFive active={active} data={data} onComplete={onComplete} />;
+      return (
+        <LGridFive
+          active={active}
+          round={round}
+          data={data}
+          onComplete={onComplete}
+        />
+      );
     case "o-5":
-      return <OGridFive active={active} data={data} onComplete={onComplete} />;
+      return (
+        <OGridFive
+          active={active}
+          round={round}
+          data={data}
+          onComplete={onComplete}
+        />
+      );
     case "e-7":
-      return <EGridSeven active={active} data={data} onComplete={onComplete} />;
+      return (
+        <EGridSeven
+          active={active}
+          round={round}
+          data={data}
+          onComplete={onComplete}
+        />
+      );
     case "u-7":
-      return <UGridSeven active={active} data={data} onComplete={onComplete} />;
+      return (
+        <UGridSeven
+          active={active}
+          round={round}
+          data={data}
+          onComplete={onComplete}
+        />
+      );
     case "i-9":
-      return <IGridNine active={active} data={data} onComplete={onComplete} />;
+      return (
+        <IGridNine
+          active={active}
+          round={round}
+          data={data}
+          onComplete={onComplete}
+        />
+      );
     case "v-9":
-      return <VGridNine active={active} data={data} onComplete={onComplete} />;
+      return (
+        <VGridNine
+          active={active}
+          round={round}
+          data={data}
+          onComplete={onComplete}
+        />
+      );
 
     default:
       break;

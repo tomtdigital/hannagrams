@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../utils/app-context";
 
-const LGridFive = ({ data, onComplete }) => {
+const LGridFive = ({ active, data, round, onComplete }) => {
   // All downs then all acrosses
   const baseGrid = [
     [
@@ -18,12 +18,14 @@ const LGridFive = ({ data, onComplete }) => {
       { cell: 19, guess: "", answer: data[1].word[3].toUpperCase() },
     ],
   ];
-  const [grid, setGrid] = useState(baseGrid);
+  const { keyPressed, setActiveWord, finishedGrids } = useContext(AppContext);
+  const [grid, setGrid] = useState(
+    finishedGrids[round]?.length > 0 ? finishedGrids[round] : baseGrid
+  );
   const wordCells = baseGrid.map((word) => word.map((letter) => letter.cell));
   const activeCells = wordCells.flatMap((cell) => cell);
   const [toggledWord, setToggledWord] = useState(wordCells[0]);
   const [toggledCell, setToggledCell] = useState(toggledWord[0]);
-  const { keyPressed, setActiveWord } = useContext(AppContext);
 
   const toggleWords = (cell) => {
     // Only do something if its a cell in the game
@@ -127,18 +129,19 @@ const LGridFive = ({ data, onComplete }) => {
       }
     };
 
-    if (keyPressed) handleKeyPress(keyPressed);
+    if (keyPressed && active) handleKeyPress(keyPressed);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyPressed]);
 
   useEffect(() => {
     if (
+      active &&
       grid.every((word) =>
         word.every((letter) => letter.guess === letter.answer)
       )
     )
-      onComplete();
-  }, [grid, onComplete]);
+      onComplete(grid);
+  }, [active, grid, onComplete]);
 
   return (
     <div className="flex justify-center h-[calc(60vh-104px)]">

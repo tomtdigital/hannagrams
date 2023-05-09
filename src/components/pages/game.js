@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import jsonData from "../../api/data.json";
 import Grid from "../organisms/grid";
 import Page from "../organisms/page";
@@ -95,9 +95,9 @@ const Game = () => {
             <TabPanel key={game.grid + "grid"}>
               <Grid
                 type={game.grid}
-                stage={index}
-                active={active}
+                round={index}
                 data={game.data}
+                active={active}
                 bonusScore={bonusScore}
               />
               <div className="h-[70px] bg-blue mt-[3em]">
