@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../utils/app-context";
 
-const Keyboard = () => {
+const Keyboard = ({ active }) => {
   const rows = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -28,7 +28,7 @@ const Keyboard = () => {
                   className={`flex items-center justify-center cursor-pointer bg-midGrey text-white mr-[0.2em] mb-[0.2em] rounded-[0.2em] text-center font-bold`}
                   onClick={(event) => {
                     event.preventDefault();
-                    if (!gameComplete) {
+                    if (!gameComplete && active) {
                       //   object forces re-render
                       setKeyPressed({ letter: char });
                     }

@@ -52,7 +52,7 @@
           "anagram": "s e a b d y",
           "word": "beddays",
           "clue": "They pass by so quickly",
-          "details": { "mapping": "(3,5)" }
+          "details": { "wordCount": "2" }
         }
       ]
     },
@@ -64,7 +64,7 @@
           "anagram": "e r i a f",
           "word": "ifear",
           "clue": "Massacre",
-          "details": { "mapping": "(1,4)" }
+          "details": { "wordCount": "2" }
         },
         {
           "anagram": "y a h p",
@@ -86,13 +86,13 @@
           "anagram": "s a t i",
           "word": "titsass",
           "clue": "Toast these before dick",
-          "details": { "mapping": "(4,3)" }
+          "details": { "wordCount": "2" }
         },
         {
           "anagram": "a o t m s g e",
           "word": "tomsage",
           "clue": "Frequently mocked :'(",
-          "details": { "mapping": "(4,3)" }
+          "details": { "wordCount": "2" }
         },
         {
           "anagram": "d s m r l u o",
@@ -123,6 +123,6 @@
     "anagram": "v i y u o e l",
     "word": "iloveyou",
     "letter": "y",
-    "details": { "mapping": "(1,4,3)" }
+    "details": { "wordCount": "3" }
   }
 }

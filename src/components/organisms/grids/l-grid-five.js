@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../utils/app-context";
 
-const LGridFive = ({ active, data, onComplete }) => {
+const LGridFive = ({ data, onComplete }) => {
   // All downs then all acrosses
   const baseGrid = [
     [

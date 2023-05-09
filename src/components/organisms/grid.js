@@ -13,12 +13,29 @@ const Grid = ({ type, active, data, bonusScore }) => {
     setTabIndex,
     stage,
     setStage,
+    cluesRevealed,
     score,
+    setScore,
     setBonusUnlocked,
     setGameComplete,
   } = useContext(AppContext);
 
   const onComplete = () => {
+    // Calculate/set score
+    const wordsAvailable = data.map((item) => item.word);
+    let toAdd = 0;
+
+    for (let x = 0; x < wordsAvailable.length; x++) {
+      const word = wordsAvailable[x];
+      if (cluesRevealed.includes(wordsAvailable[x])) {
+        toAdd += word.length;
+      } else {
+        toAdd += word.length * 3;
+      }
+    }
+
+    setScore(score + toAdd);
+    // Advance game
     if (stage === 5) {
       if (score >= bonusScore) {
         setBonusUnlocked(true);

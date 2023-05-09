@@ -4,7 +4,8 @@ import { AppContext } from "./app-context";
 const ContextProvider = ({ children }) => {
   const [tabIndex, setTabIndex] = useState(1);
   const [stage, setStage] = useState(1);
-  const [score, setScore] = useState(297);
+  const [cluesRevealed, setCluesRevealed] = useState([]);
+  const [score, setScore] = useState(0);
   const [keyPressed, setKeyPressed] = useState("");
   const [bonusUnlocked, setBonusUnlocked] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
@@ -17,6 +18,8 @@ const ContextProvider = ({ children }) => {
         setTabIndex,
         stage,
         setStage,
+        cluesRevealed,
+        setCluesRevealed,
         score,
         setScore,
         bonusUnlocked,
