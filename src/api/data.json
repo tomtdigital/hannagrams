@@ -1,25 +1,9 @@
 {
   "main": [
     {
-      "grid": "l-5",
-      "data": [
-        {
-          "anagram": "y l s e n",
-          "word": "sylen",
-          "clue": "Hot tub retreat",
-          "details": { "pronoun": true }
-        },
-        {
-          "anagram": "c e n i",
-          "word": "nice",
-          "clue": "Three cheers for nudity"
-        }
-      ]
-    },
-    {
       "grid": "o-5",
       "data": [
-        { "anagram": "a v l", "word": "lava", "clue": "Abed's floor'" },
+        { "anagram": "a v l", "word": "lava", "clue": "Abed's floor" },
         {
           "anagram": "d a i l",
           "word": "aldi",
@@ -36,13 +20,24 @@
       ]
     },
     {
-      "grid": "u-7",
+      "grid": "l-5",
       "data": [
         {
-          "anagram": "s t m e i",
-          "word": "times",
-          "clue": "East coast newspaper"
+          "anagram": "y l s e n",
+          "word": "sylen",
+          "clue": "Hot tub retreat",
+          "details": { "pronoun": true }
         },
+        {
+          "anagram": "c e n i",
+          "word": "nice",
+          "clue": "Three cheers for nudity"
+        }
+      ]
+    },
+    {
+      "grid": "u-7",
+      "data": [
         {
           "anagram": "p s r u o t",
           "word": "support",
@@ -53,6 +48,11 @@
           "word": "beddays",
           "clue": "They pass by so quickly",
           "details": { "wordCount": "2" }
+        },
+        {
+          "anagram": "s t m e i",
+          "word": "times",
+          "clue": "East coast newspaper"
         }
       ]
     },

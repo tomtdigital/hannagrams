@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../utils/app-context";
+import FiveGridBase from "../five-grid-base";
 
 const LGridFive = ({ active, data, round, onComplete }) => {
-  // All downs then all acrosses
   const baseGrid = [
     [
       { cell: 0, guess: "", answer: data[0].word[0].toUpperCase() },
@@ -144,42 +144,13 @@ const LGridFive = ({ active, data, round, onComplete }) => {
   }, [active, grid, onComplete]);
 
   return (
-    <div className="flex justify-center h-[calc(60vh-104px)]">
-      <div className="grid grid-cols-4 grid-rows-5 w-[calc(60vh-104px-12%)]">
-        {[...Array(20)].map((_, index) => {
-          let background;
-          let text;
-          if (activeCells.includes(index)) {
-            background = "bg-yellow";
-            text = "text-black";
-          }
-          if (toggledWord.includes(index)) {
-            background = "bg-purple";
-            text = "text-white";
-          }
-          if (toggledCell === index) background = "bg-darkPurple";
-          const value = grid
-            .flatMap(
-              (word) => word.find((letter) => letter.cell === index)?.guess
-            )
-            .find((letter) => typeof letter === "string");
-
-          return (
-            <div
-              key={`cell ${index}`}
-              className={`flex justify-center items-center ${background} ${
-                activeCells.includes(index)
-                  ? "border-solid border-[0.5px] border-darkGrey"
-                  : ""
-              }`}
-              onClick={() => handleClick(index)}
-            >
-              <div className={`${text}`}>{value}</div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <FiveGridBase
+      activeCells={activeCells}
+      toggledWord={toggledWord}
+      toggledCell={toggledCell}
+      grid={grid}
+      handleClick={handleClick}
+    />
   );
 };
 

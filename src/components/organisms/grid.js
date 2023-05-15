@@ -15,6 +15,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
     setStage,
     cluesRevealed,
     score,
+    setKeyPressed,
     setScore,
     finishedGrids,
     setFinishedGrids,
@@ -36,6 +37,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
       }
     }
     setScore(score + toAdd);
+    setKeyPressed("");
 
     // Save grid
     setFinishedGrids([...finishedGrids, stageGrid]);

@@ -14,7 +14,9 @@ const Clue = ({ active }) => {
       <p className="text-[1.5em]">{`${activeWord.anagram} ${
         activeWord.details?.pronoun ? "(p)" : ""
       } ${
-        activeWord.details?.mapping ? activeWord.details?.wordCount : ""
+        activeWord.details?.wordCount
+          ? `(${activeWord.details?.wordCount})`
+          : ""
       }`}</p>
       {cluesRevealed?.includes(activeWord.word) || !active ? (
         <p className="text-[1em]">{activeWord.clue}</p>
