@@ -36,7 +36,9 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
         toAdd += word.length * 3;
       }
     }
-    setScore(score + toAdd);
+    const total = score + toAdd;
+    setScore(total);
+
     setKeyPressed("");
 
     // Save grid
@@ -44,7 +46,8 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
 
     // Advance game
     if (stage === 5) {
-      if (score >= bonusScore) {
+      // Unlock bonus
+      if (total >= bonusScore) {
         setBonusUnlocked(true);
         setStage(stage + 1);
         setTabIndex(tabIndex + 1);

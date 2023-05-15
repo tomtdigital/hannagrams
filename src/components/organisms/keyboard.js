@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../utils/app-context";
 
 const Keyboard = ({ active }) => {
@@ -9,6 +9,22 @@ const Keyboard = ({ active }) => {
   ];
 
   const { gameComplete, setKeyPressed } = useContext(AppContext);
+
+  // TEMP
+  useEffect(() => {
+    const handleKeyboardUse = ({ key }) => {
+      if (/^[a-zA-Z]+$/.test(key) && (key.length === 1 || key === "Backspace"))
+        setKeyPressed({
+          letter: key === "Backspace" ? "DEL" : key.toUpperCase(),
+        });
+    };
+
+    window.addEventListener("keydown", handleKeyboardUse);
+    return () => {
+      window.removeEventListener("keydown", handleKeyboardUse);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
