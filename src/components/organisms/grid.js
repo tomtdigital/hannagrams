@@ -13,6 +13,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
     setTabIndex,
     stage,
     setStage,
+    setModalVisible,
     cluesRevealed,
     score,
     setKeyPressed,
@@ -36,13 +37,13 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
         toAdd += word.length * 3;
       }
     }
+
     const total = score + toAdd;
     setScore(total);
-
     setKeyPressed("");
-
     // Save grid
     setFinishedGrids([...finishedGrids, stageGrid]);
+    setModalVisible(true);
 
     // Advance game
     if (stage === 5) {

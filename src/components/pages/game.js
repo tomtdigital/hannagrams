@@ -8,6 +8,8 @@ import Bonus from "../organisms/bonus";
 import { useMemo } from "react";
 import Keyboard from "../organisms/keyboard";
 import Clue from "../molecules/clue";
+import { shuffleArray } from "../utils/shuffle-array";
+import Modal from "../molecules/modal";
 
 // TODO: Hide all and show message when under a particular height
 // Later
@@ -16,8 +18,16 @@ import Clue from "../molecules/clue";
 
 const Game = () => {
   const { main, bonus } = jsonData;
-  const { stage, score, tabIndex, setTabIndex, bonusUnlocked, gameComplete } =
-    useContext(AppContext);
+  const {
+    stage,
+    score,
+    tabIndex,
+    setTabIndex,
+    bonusUnlocked,
+    gameComplete,
+    modalVisible,
+    setModalVisible,
+  } = useContext(AppContext);
   const allWords = useMemo(
     () =>
       main.flatMap((game) => {
@@ -36,6 +46,17 @@ const Game = () => {
     () => maxScore - averageWordLength * 6,
     [maxScore, averageWordLength]
   );
+
+  const praise = [
+    "Nice nice nice!!!",
+    "Fucking galaxy brain!!!",
+    "Loving that big brain energy!",
+    "You're so fucking smart!!!",
+    "All the Tom's go wild!!!",
+    "Absolute scenes!!!",
+  ];
+
+  shuffleArray(praise);
 
   return (
     <Page>
@@ -93,12 +114,19 @@ const Game = () => {
 
           return (
             <TabPanel key={game.grid + "grid"}>
+              <Modal
+                visible={modalVisible}
+                stage={stage}
+                data={game.data}
+                praise={praise}
+              />
               <Grid
                 type={game.grid}
                 round={index}
                 data={game.data}
                 active={active}
                 bonusScore={bonusScore}
+                praise={praise}
               />
               <div className="h-[70px] bg-blue mt-[3em]">
                 <Clue active={active} />
