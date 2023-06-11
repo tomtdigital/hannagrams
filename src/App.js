@@ -1,13 +1,11 @@
-import Game from "./components/pages/game";
+import GameWithData from "./components/utils/game-with-data";
 import ContextProvider from "./components/utils/context";
-// import Welcome from "./components/pages/welcome";
 import "./input.css";
 
 const App = () => {
   return (
     <ContextProvider>
-      {/* <Welcome /> */}
-      <Game />
+      <GameWithData />
     </ContextProvider>
   );
 };
