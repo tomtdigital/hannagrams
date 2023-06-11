@@ -1,15 +1,13 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import jsonData from "../../api/data.json";
-import Grid from "../organisms/grid";
+import Clue from "../molecules/clue";
+import Bonus from "../organisms/bonus";
+import GridSection from "../organisms/grid-section";
+import Keyboard from "../organisms/keyboard";
 import Page from "../organisms/page";
 import { AppContext } from "../utils/app-context";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import Bonus from "../organisms/bonus";
-import { useMemo } from "react";
-import Keyboard from "../organisms/keyboard";
-import Clue from "../molecules/clue";
 import { shuffleArray } from "../utils/shuffle-array";
-import Modal from "../molecules/modal";
 
 // TODO: Hide all and show message when under a particular height
 // Later
@@ -23,10 +21,9 @@ const Game = () => {
     score,
     tabIndex,
     setTabIndex,
+    modalVisible,
     bonusUnlocked,
     gameComplete,
-    modalVisible,
-    setModalVisible,
   } = useContext(AppContext);
   const allWords = useMemo(
     () =>
@@ -47,16 +44,18 @@ const Game = () => {
     [maxScore, averageWordLength]
   );
 
-  const praise = [
-    "Nice nice nice!!!",
-    "Fucking galaxy brain!!!",
-    "Loving that big brain energy!",
-    "You're so fucking smart!!!",
-    "All the Tom's go wild!!!",
-    "Absolute scenes!!!",
-  ];
+  const praise = useMemo(() => {
+    const praiseList = [
+      "Nice nice nice!!!",
+      "Fucking galaxy brain!!!",
+      "Loving that big brain energy!",
+      "You're so fucking smart!!!",
+      "All the Tom's go wild!!!",
+      "Absolute scenes!!!",
+    ];
 
-  shuffleArray(praise);
+    return shuffleArray(praiseList);
+  }, []);
 
   return (
     <Page>
@@ -110,17 +109,11 @@ const Game = () => {
           </TabList>
         </div>
         {main.map((game, index) => {
-          const active = !gameComplete && stage === index;
+          const active = !gameComplete && !modalVisible && stage === index;
 
           return (
             <TabPanel key={game.grid + "grid"}>
-              <Modal
-                visible={modalVisible}
-                stage={stage}
-                data={game.data}
-                praise={praise}
-              />
-              <Grid
+              <GridSection
                 type={game.grid}
                 round={index}
                 data={game.data}

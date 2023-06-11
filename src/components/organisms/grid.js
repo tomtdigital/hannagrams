@@ -1,64 +1,18 @@
 import { useContext } from "react";
-import { AppContext } from "../utils/app-context";
 import EGridSeven from "./grids/e-grid-seven";
 import IGridNine from "./grids/i-grid-nine";
 import LGridFive from "./grids/l-grid-five";
 import OGridFive from "./grids/o-grid-five";
 import UGridSeven from "./grids/u-grid-seven";
 import VGridNine from "./grids/v-grid-nine";
+import { AppContext } from "../utils/app-context";
 
-const Grid = ({ type, round, active, data, bonusScore }) => {
-  const {
-    tabIndex,
-    setTabIndex,
-    stage,
-    setStage,
-    setModalVisible,
-    cluesRevealed,
-    score,
-    setKeyPressed,
-    setScore,
-    finishedGrids,
-    setFinishedGrids,
-    setBonusUnlocked,
-    setGameComplete,
-  } = useContext(AppContext);
+const Grid = ({ type, active, round, data }) => {
+  const { setModalVisible, setLastCompletedGrid } = useContext(AppContext);
 
-  const onComplete = (stageGrid) => {
-    // Calculate/set score
-    const wordsAvailable = data.map((item) => item.word);
-    let toAdd = 0;
-
-    for (let x = 0; x < wordsAvailable.length; x++) {
-      const word = wordsAvailable[x];
-      if (cluesRevealed.includes(wordsAvailable[x])) {
-        toAdd += word.length;
-      } else {
-        toAdd += word.length * 3;
-      }
-    }
-
-    const total = score + toAdd;
-    setScore(total);
-    setKeyPressed("");
-    // Save grid
-    setFinishedGrids([...finishedGrids, stageGrid]);
+  const handleComplete = (grid) => {
     setModalVisible(true);
-
-    // Advance game
-    if (stage === 5) {
-      // Unlock bonus
-      if (total >= bonusScore) {
-        setBonusUnlocked(true);
-        setStage(stage + 1);
-        setTabIndex(tabIndex + 1);
-      } else {
-        setGameComplete(true);
-      }
-    } else {
-      setStage(stage + 1);
-      setTabIndex(tabIndex + 1);
-    }
+    setLastCompletedGrid(grid);
   };
 
   switch (type) {
@@ -68,7 +22,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
           active={active}
           round={round}
           data={data}
-          onComplete={onComplete}
+          onComplete={handleComplete}
         />
       );
     case "o-5":
@@ -77,7 +31,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
           active={active}
           round={round}
           data={data}
-          onComplete={onComplete}
+          onComplete={handleComplete}
         />
       );
     case "e-7":
@@ -86,7 +40,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
           active={active}
           round={round}
           data={data}
-          onComplete={onComplete}
+          onComplete={handleComplete}
         />
       );
     case "u-7":
@@ -95,7 +49,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
           active={active}
           round={round}
           data={data}
-          onComplete={onComplete}
+          onComplete={handleComplete}
         />
       );
     case "i-9":
@@ -104,7 +58,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
           active={active}
           round={round}
           data={data}
-          onComplete={onComplete}
+          onComplete={handleComplete}
         />
       );
     case "v-9":
@@ -113,7 +67,7 @@ const Grid = ({ type, round, active, data, bonusScore }) => {
           active={active}
           round={round}
           data={data}
-          onComplete={onComplete}
+          onComplete={handleComplete}
         />
       );
 

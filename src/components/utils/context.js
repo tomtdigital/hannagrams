@@ -7,7 +7,8 @@ const ContextProvider = ({ children }) => {
   const [cluesRevealed, setCluesRevealed] = useState([]);
   const [score, setScore] = useState(0);
   const [keyPressed, setKeyPressed] = useState("");
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [lastCompletedGrid, setLastCompletedGrid] = useState([]);
   const [finishedGrids, setFinishedGrids] = useState([]);
   const [bonusUnlocked, setBonusUnlocked] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
@@ -24,6 +25,8 @@ const ContextProvider = ({ children }) => {
         setCluesRevealed,
         score,
         setScore,
+        lastCompletedGrid,
+        setLastCompletedGrid,
         finishedGrids,
         setFinishedGrids,
         bonusUnlocked,
