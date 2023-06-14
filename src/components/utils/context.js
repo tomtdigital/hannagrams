@@ -10,7 +10,7 @@ const ContextProvider = ({ children }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [lastCompletedGrid, setLastCompletedGrid] = useState([]);
   const [finishedGrids, setFinishedGrids] = useState([]);
-  const [bonusUnlocked, setBonusUnlocked] = useState(false);
+  const [bonusUnlocked, setBonusUnlocked] = useState(true);
   const [gameComplete, setGameComplete] = useState(false);
   const [activeWord, setActiveWord] = useState({});
 

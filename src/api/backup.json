@@ -120,9 +120,8 @@
     }
   ],
   "bonus": {
-    "anagram": "v i y u o e l",
     "word": "iloveyou",
-    "letter": "y",
+    "additionalLetters": ["y"],
     "details": { "wordCount": "3" }
   }
 }

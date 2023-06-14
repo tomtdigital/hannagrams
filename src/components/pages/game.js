@@ -9,12 +9,15 @@ import { AppContext } from "../utils/app-context";
 import { shuffleArray } from "../utils/shuffle-array";
 import Welcome from "./welcome";
 
+// Build
 // TODO: Bonus stage
+// TODO: Setup monorepo with component library
+// TODO: Migrate hannagrams
+// TODO: Use components to build a game
+// TODO: Design backend (add date to game)
+// UI
 // TODO: Mock NYT behaviour- skip letters already filled in
 // TODO: Hide all and show message when under a particular height
-// Later
-// TODO: setup localStorage (gameData with guesses + everything in context state)
-// TODO: use localStorage on play button click
 
 const Game = ({ data: { main, bonus } }) => {
   const {
@@ -147,6 +150,9 @@ const Game = ({ data: { main, bonus } }) => {
             {bonusUnlocked && (
               <TabPanel>
                 <Bonus data={bonus} active={!gameComplete} />
+                <div className="grid grid-cols-1 grid-rows-3 h-[calc(40vh-60px-70px-3em)]">
+                  <Keyboard active={!gameComplete} />
+                </div>
               </TabPanel>
             )}
           </Tabs>
