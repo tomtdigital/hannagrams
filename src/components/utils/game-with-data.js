@@ -22,7 +22,7 @@ const GameWithData = () => {
           console.error(
             "Unable to fetch data from DB!\n\nUsing a backup JSON file instead"
           );
-          setter(backupJson.main);
+          setter(backupJson[endpoint]);
         }
         setLoading(false);
       }, 1000);

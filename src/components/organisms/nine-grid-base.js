@@ -22,7 +22,7 @@ const NineGridBase = ({
           return (
             <div
               key={`cell ${index}`}
-              className={`flex justify-center items-center ${backgroundColor} ${
+              className={`cursor-pointer flex justify-center items-center ${backgroundColor} ${
                 activeCells.includes(index)
                   ? "border-solid border-[0.5px] border-darkGrey"
                   : ""

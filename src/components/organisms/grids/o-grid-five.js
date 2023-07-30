@@ -106,7 +106,6 @@ const OGridFive = ({ data, round, active, onComplete }) => {
 
       if (guess === "DEL") {
         if (cellPosition === 0) {
-          console.log(wordLocation);
           if (wordLocation === 0) {
             const lastWord = wordCells[wordCells.length - 1];
             setToggledWord(lastWord);
