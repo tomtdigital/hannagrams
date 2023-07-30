@@ -7,10 +7,12 @@ const ContextProvider = ({ children }) => {
   const [cluesRevealed, setCluesRevealed] = useState([]);
   const [score, setScore] = useState(0);
   const [keyPressed, setKeyPressed] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  const [advanceModalVisible, setAdvanceModalVisible] = useState(false);
+  const [victoryModalVisible, setVictoryModalVisible] = useState(false);
   const [lastCompletedGrid, setLastCompletedGrid] = useState([]);
   const [finishedGrids, setFinishedGrids] = useState([]);
-  const [bonusUnlocked, setBonusUnlocked] = useState(true);
+  const [bonusUnlocked, setBonusUnlocked] = useState(false);
+  const [bonusGuess, setBonusGuess] = useState("");
   const [gameComplete, setGameComplete] = useState(false);
   const [activeWord, setActiveWord] = useState({});
 
@@ -31,12 +33,16 @@ const ContextProvider = ({ children }) => {
         setFinishedGrids,
         bonusUnlocked,
         setBonusUnlocked,
+        bonusGuess,
+        setBonusGuess,
         gameComplete,
         setGameComplete,
         keyPressed,
         setKeyPressed,
-        modalVisible,
-        setModalVisible,
+        advanceModalVisible,
+        setAdvanceModalVisible,
+        victoryModalVisible,
+        setVictoryModalVisible,
         activeWord,
         setActiveWord,
       }}

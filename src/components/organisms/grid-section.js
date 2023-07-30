@@ -1,16 +1,25 @@
 import { useContext } from "react";
 import { AppContext } from "../utils/app-context";
-import Modal from "../molecules/modal";
 import Grid from "./grid";
+import AdvanceModal from "../molecules/advance-modal";
+import VictoryModal from "../molecules/victory-modal";
 
-const GridSection = ({ type, round, active, data, praise, bonusScore }) => {
+const GridSection = ({
+  type,
+  round,
+  active,
+  data,
+  praise,
+  bonusScore,
+  maxScore,
+}) => {
   const {
     tabIndex,
     setTabIndex,
     stage,
     setStage,
-    modalVisible,
-    setModalVisible,
+    advanceModalVisible,
+    setAdvanceModalVisible,
     cluesRevealed,
     score,
     setKeyPressed,
@@ -20,6 +29,8 @@ const GridSection = ({ type, round, active, data, praise, bonusScore }) => {
     setScore,
     setBonusUnlocked,
     setGameComplete,
+    victoryModalVisible,
+    setVictoryModalVisible,
   } = useContext(AppContext);
 
   const advance = () => {
@@ -41,7 +52,7 @@ const GridSection = ({ type, round, active, data, praise, bonusScore }) => {
     // Reset values
     setKeyPressed("");
     setFinishedGrids([...finishedGrids, lastCompletedGrid]);
-    setModalVisible(false);
+    setAdvanceModalVisible(false);
 
     // Advance game
     if (stage === 5) {
@@ -52,6 +63,7 @@ const GridSection = ({ type, round, active, data, praise, bonusScore }) => {
         setTabIndex(tabIndex + 1);
       } else {
         setGameComplete(true);
+        setVictoryModalVisible(true);
       }
     } else {
       setStage(stage + 1);
@@ -62,13 +74,14 @@ const GridSection = ({ type, round, active, data, praise, bonusScore }) => {
   return (
     <>
       <Grid type={type} active={active} round={round} data={data} />
-      <Modal
-        visible={modalVisible}
+      <AdvanceModal
+        visible={advanceModalVisible}
         stage={stage}
         data={data}
         praise={praise}
         handleAdvance={() => advance()}
       />
+      <VictoryModal visible={victoryModalVisible} maxScore={maxScore} />
     </>
   );
 };

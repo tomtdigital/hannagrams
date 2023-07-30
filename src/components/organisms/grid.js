@@ -8,10 +8,11 @@ import VGridNine from "./grids/v-grid-nine";
 import { AppContext } from "../utils/app-context";
 
 const Grid = ({ type, active, round, data }) => {
-  const { setModalVisible, setLastCompletedGrid } = useContext(AppContext);
+  const { setAdvanceModalVisible, setLastCompletedGrid } =
+    useContext(AppContext);
 
   const handleComplete = (grid) => {
-    setModalVisible(true);
+    setAdvanceModalVisible(true);
     setLastCompletedGrid(grid);
   };
 

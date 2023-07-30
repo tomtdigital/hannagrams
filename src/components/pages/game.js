@@ -10,7 +10,6 @@ import { shuffleArray } from "../utils/shuffle-array";
 import Welcome from "./welcome";
 
 // Build
-// TODO: Bonus stage
 // TODO: Setup monorepo with component library
 // TODO: Migrate hannagrams
 // TODO: Use components to build a game
@@ -25,7 +24,7 @@ const Game = ({ data: { main, bonus } }) => {
     score,
     tabIndex,
     setTabIndex,
-    modalVisible,
+    advanceModalVisible,
     bonusUnlocked,
     gameComplete,
   } = useContext(AppContext);
@@ -39,6 +38,7 @@ const Game = ({ data: { main, bonus } }) => {
   );
   const totalLetters = useMemo(() => allWords.join("").length, [allWords]);
   const maxScore = useMemo(() => totalLetters * 3, [totalLetters]);
+  const maxScorePlusBonus = maxScore + 20;
   const averageWordLength = useMemo(
     () => Math.floor(totalLetters / allWords.length),
     [totalLetters, allWords]
@@ -126,7 +126,8 @@ const Game = ({ data: { main, bonus } }) => {
               </TabList>
             </div>
             {main.map((game, index) => {
-              const active = !gameComplete && !modalVisible && stage === index;
+              const active =
+                !gameComplete && !advanceModalVisible && stage === index;
 
               return (
                 <TabPanel key={game.grid + "grid"}>
@@ -137,6 +138,7 @@ const Game = ({ data: { main, bonus } }) => {
                     active={active}
                     bonusScore={bonusScore}
                     praise={praise}
+                    maxScore={maxScorePlusBonus}
                   />
                   <div className="h-[70px] bg-blue mt-[3em]">
                     <Clue active={active} />
@@ -149,7 +151,11 @@ const Game = ({ data: { main, bonus } }) => {
             })}
             {bonusUnlocked && (
               <TabPanel>
-                <Bonus data={bonus} active={!gameComplete} />
+                <Bonus
+                  data={bonus}
+                  active={!gameComplete}
+                  maxScore={maxScorePlusBonus}
+                />
                 <div className="grid grid-cols-1 grid-rows-3 h-[calc(40vh-60px-70px-3em)]">
                   <Keyboard active={!gameComplete} />
                 </div>
