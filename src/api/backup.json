@@ -120,8 +120,6 @@
     }
   ],
   "bonus": {
-    "word": "iloveyou",
-    "additionalLetters": ["y"],
-    "details": { "wordCount": "3" }
+    "answer": "i love you"
   }
 }

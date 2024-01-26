@@ -13,8 +13,9 @@ const Bonus = ({ data, active, maxScore }) => {
     bonusGuess,
     setBonusGuess,
   } = useContext(AppContext);
-  const { details, additionalLetters, word } = data;
-  const multipleWords = details.wordCount && details.wordCount > 1;
+  const { answer } = data;
+  const word = answer.replace(/ /g, "");
+  const multipleWords = answer.includes(" ");
   const [toggledCell, setToggledCell] = useState(0);
 
   useEffect(() => {
@@ -71,17 +72,10 @@ const Bonus = ({ data, active, maxScore }) => {
         <h1 className="text-center text-header1">Bonus Round</h1>
         <p className="my-2">
           Congratulations on completing all of the grids! Can you guess the{" "}
-          {`${!multipleWords || !details.wordCount ? "word" : "phrase"}`} that
-          ties everything together?
+          {`${!multipleWords ? "word" : "phrase"}`} that ties everything
+          together?
         </p>
-        <p className="my-2">
-          Use all of the grid shapes, plus the letter
-          {additionalLetters.length > 1 ? "s" : ""}{" "}
-          {additionalLetters.map(
-            (letter, index) =>
-              `${letter}${index < additionalLetters.length - 1 ? "," : ""}`
-          )}{" "}
-        </p>
+        <p className="my-2">Use all of the grid shapes</p>
         <div className="flex justify-center p-4">
           <div className={`w-[100%] grid grid-cols-${word.length}`}>
             {[...Array(word.length)].map((_, index) => {
@@ -101,7 +95,7 @@ const Bonus = ({ data, active, maxScore }) => {
           </div>
         </div>
         {multipleWords && (
-          <p className="my-2">Word count: {details.wordCount}</p>
+          <p className="my-2">Word count: {answer.split(" ").length}</p>
         )}
         <p>Toggled cell {toggledCell}</p>
       </div>
