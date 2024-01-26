@@ -13,9 +13,9 @@ const Bonus = ({ data, active, maxScore }) => {
     bonusGuess,
     setBonusGuess,
   } = useContext(AppContext);
-  const { answer } = data;
-  const word = answer.replace(/ /g, "");
-  const multipleWords = answer.includes(" ");
+  const { category } = data;
+  const word = category.replace(/ /g, "");
+  const multipleWords = category.includes(" ");
   const [toggledCell, setToggledCell] = useState(0);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ const Bonus = ({ data, active, maxScore }) => {
           </div>
         </div>
         {multipleWords && (
-          <p className="my-2">Word count: {answer.split(" ").length}</p>
+          <p className="my-2">Word count: {category.split(" ").length}</p>
         )}
         <p>Toggled cell {toggledCell}</p>
       </div>
