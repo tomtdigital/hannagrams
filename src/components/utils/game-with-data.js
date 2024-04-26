@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import backupJson from "../../api/backup.json";
 import Game from "../pages/game";
 import Page from "../organisms/page";
+import { AppContext } from "./app-context";
 
 const GameWithData = () => {
   const [loading, setLoading] = useState(true);
   const [mainData, setMainData] = useState([]);
-  const [bonusData, setBonusData] = useState({});
+  const [solution, setSolution] = useState("");
+  const { setTotalStages } = useContext(AppContext);
 
   useEffect(() => {
     const fetchData = async (endpoint, setter) => {
@@ -15,7 +17,7 @@ const GameWithData = () => {
         setLoading(true);
         try {
           const { data: response } = await axios.get(
-            `http://localhost:3030/${endpoint}`
+            `http://localhost:5000/${endpoint}`
           );
           setter(response);
         } catch (error) {
@@ -29,13 +31,19 @@ const GameWithData = () => {
     };
 
     fetchData("main", setMainData);
-    fetchData("bonus", setBonusData);
+    fetchData("solution", setSolution);
   }, []);
+
+  useEffect(() => {
+    if (mainData && mainData.length > 0) {
+      setTotalStages(mainData.length);
+    }
+  }, [mainData, setTotalStages]);
 
   return (
     <div>
       {loading && <Page>Loading</Page>}
-      {!loading && <Game data={{ main: mainData, bonus: bonusData }} />}
+      {!loading && <Game data={{ main: mainData, solution }} />}
     </div>
   );
 };

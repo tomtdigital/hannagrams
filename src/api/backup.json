@@ -1,4 +1,5 @@
 {
+  "date": "2024-01-28",
   "main": [
     {
       "grid": "o-5",
@@ -119,7 +120,5 @@
       ]
     }
   ],
-  "bonus": {
-    "category": "i love you"
-  }
+  "solution": "i love you"
 }

@@ -4,20 +4,13 @@ import Grid from "./grid";
 import AdvanceModal from "../molecules/advance-modal";
 import VictoryModal from "../molecules/victory-modal";
 
-const GridSection = ({
-  type,
-  round,
-  active,
-  data,
-  praise,
-  bonusScore,
-  maxScore,
-}) => {
+const GridSection = ({ type, round, active, data, praise, maxScore }) => {
   const {
     tabIndex,
     setTabIndex,
     stage,
     setStage,
+    totalStages,
     advanceModalVisible,
     setAdvanceModalVisible,
     cluesRevealed,
@@ -27,11 +20,13 @@ const GridSection = ({
     finishedGrids,
     setFinishedGrids,
     setScore,
-    setBonusUnlocked,
-    setGameComplete,
     victoryModalVisible,
     setVictoryModalVisible,
+    correctSolution,
+    setGameComplete,
   } = useContext(AppContext);
+
+  const allGridsComplete = stage + 1 === totalStages;
 
   const advance = () => {
     // Calculate/set score
@@ -54,18 +49,11 @@ const GridSection = ({
     setFinishedGrids([...finishedGrids, lastCompletedGrid]);
     setAdvanceModalVisible(false);
 
-    // Advance game
-    if (stage === 5) {
-      // Unlock bonus
-      if (total >= bonusScore) {
-        setBonusUnlocked(true);
-        setStage(stage + 1);
-        setTabIndex(tabIndex + 1);
-      } else {
-        setGameComplete(true);
-        setVictoryModalVisible(true);
-      }
+    if (allGridsComplete && correctSolution) {
+      setGameComplete(true);
+      setVictoryModalVisible(true);
     } else {
+      // Advance game
       setStage(stage + 1);
       setTabIndex(tabIndex + 1);
     }
@@ -81,7 +69,11 @@ const GridSection = ({
         praise={praise}
         handleAdvance={() => advance()}
       />
-      <VictoryModal visible={victoryModalVisible} maxScore={maxScore} />
+      <VictoryModal
+        visible={victoryModalVisible}
+        maxScore={maxScore}
+        allGridsComplete={allGridsComplete}
+      />
     </>
   );
 };

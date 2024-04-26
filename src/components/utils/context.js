@@ -3,6 +3,7 @@ import { AppContext } from "./app-context";
 
 const ContextProvider = ({ children }) => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [totalStages, setTotalStages] = useState(0);
   const [stage, setStage] = useState(0);
   const [cluesRevealed, setCluesRevealed] = useState([]);
   const [score, setScore] = useState(0);
@@ -11,8 +12,8 @@ const ContextProvider = ({ children }) => {
   const [victoryModalVisible, setVictoryModalVisible] = useState(false);
   const [lastCompletedGrid, setLastCompletedGrid] = useState([]);
   const [finishedGrids, setFinishedGrids] = useState([]);
-  const [bonusUnlocked, setBonusUnlocked] = useState(false);
-  const [bonusGuess, setBonusGuess] = useState("");
+  const [solutionGuess, setSolutionGuess] = useState("");
+  const [correctSolution, setCorrectSolution] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
   const [activeWord, setActiveWord] = useState({});
 
@@ -21,6 +22,8 @@ const ContextProvider = ({ children }) => {
       value={{
         tabIndex,
         setTabIndex,
+        totalStages,
+        setTotalStages,
         stage,
         setStage,
         cluesRevealed,
@@ -31,10 +34,10 @@ const ContextProvider = ({ children }) => {
         setLastCompletedGrid,
         finishedGrids,
         setFinishedGrids,
-        bonusUnlocked,
-        setBonusUnlocked,
-        bonusGuess,
-        setBonusGuess,
+        solutionGuess,
+        setSolutionGuess,
+        correctSolution,
+        setCorrectSolution,
         gameComplete,
         setGameComplete,
         keyPressed,

@@ -2,12 +2,12 @@ import { useContext } from "react";
 import Modal from "./modal";
 import { AppContext } from "../utils/app-context";
 
-const VictoryModal = ({ visible, maxScore }) => {
-  const { setVictoryModalVisible, score, bonusUnlocked, cluesRevealed } =
+const VictoryModal = ({ visible, maxScore, allGridsComplete }) => {
+  const { setVictoryModalVisible, score, cluesRevealed, stage, totalStages } =
     useContext(AppContext);
 
-  return (
-    <Modal visible={visible}>
+  const content = allGridsComplete ? (
+    <>
       <p>Hannagrams Complete!</p>
       <p>Yessss!!! You did it!!! The Hannah's go fucking mental!!!</p>
       <p>
@@ -19,17 +19,34 @@ const VictoryModal = ({ visible, maxScore }) => {
           {cluesRevealed.length === 1 ? "" : "s"}
         </p>
       )}
-      {!bonusUnlocked && (
-        <p>Next time, try to use less clues to unlock the bonus round</p>
-      )}
       <button
         className="bg-yellow"
         onClick={() => setVictoryModalVisible(false)}
       >
         Close
       </button>
-    </Modal>
+    </>
+  ) : (
+    <>
+      <p>Theme Solved!</p>
+      <p>
+        Yessss!!! You got the theme with only {stage + 1} of {totalStages}{" "}
+        letters.
+      </p>
+      <p>
+        See how close you can get to the maximum score of {maxScore} with the
+        remaining grids!
+      </p>
+      <button
+        className="bg-yellow"
+        onClick={() => setVictoryModalVisible(false)}
+      >
+        Close
+      </button>
+    </>
   );
+
+  return <Modal visible={visible}>{content}</Modal>;
 };
 
 export default VictoryModal;

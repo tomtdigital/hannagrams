@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Clue from "../molecules/clue";
-import Bonus from "../organisms/bonus";
+import Solution from "../organisms/solution";
 import GridSection from "../organisms/grid-section";
 import Keyboard from "../organisms/keyboard";
 import Page from "../organisms/page";
@@ -18,14 +18,13 @@ import Welcome from "./welcome";
 // TODO: Mock NYT behaviour- skip letters already filled in
 // TODO: Hide all and show message when under a particular height
 
-const Game = ({ data: { main, bonus } }) => {
+const Game = ({ data: { main, solution } }) => {
   const {
     stage,
     score,
     tabIndex,
     setTabIndex,
     advanceModalVisible,
-    bonusUnlocked,
     gameComplete,
   } = useContext(AppContext);
   const allWords = useMemo(
@@ -38,15 +37,6 @@ const Game = ({ data: { main, bonus } }) => {
   );
   const totalLetters = useMemo(() => allWords.join("").length, [allWords]);
   const maxScore = useMemo(() => totalLetters * 3, [totalLetters]);
-  const maxScorePlusBonus = maxScore + 20;
-  const averageWordLength = useMemo(
-    () => Math.floor(totalLetters / allWords.length),
-    [totalLetters, allWords]
-  );
-  const bonusScore = useMemo(
-    () => maxScore - averageWordLength * 6,
-    [maxScore, averageWordLength]
-  );
 
   const [readWelcome, setReadWelcome] = useState(
     localStorage.getItem("readHannagramsWelcome")
@@ -112,17 +102,15 @@ const Game = ({ data: { main, bonus } }) => {
                     </Tab>
                   );
                 })}
-                {bonusUnlocked && (
-                  <Tab
-                    className={`w-8 h-8 rounded-[50%] flex items-center justify-center ml-1 mr-1 text-white font-medium border-solid border-2 ${
-                      gameComplete
-                        ? "border-green bg-green"
-                        : "border-purple bg-purple"
-                    } cursor-pointer`}
-                  >
-                    7
-                  </Tab>
-                )}
+                <Tab
+                  className={`w-8 h-8 rounded-[50%] flex items-center justify-center ml-1 mr-1 text-white font-medium border-solid border-2 ${
+                    gameComplete
+                      ? "border-green bg-green"
+                      : "border-purple bg-purple"
+                  } cursor-pointer`}
+                >
+                  7
+                </Tab>
               </TabList>
             </div>
             {main.map((game, index) => {
@@ -136,9 +124,8 @@ const Game = ({ data: { main, bonus } }) => {
                     round={index}
                     data={game.data}
                     active={active}
-                    bonusScore={bonusScore}
                     praise={praise}
-                    maxScore={maxScorePlusBonus}
+                    maxScore={maxScore}
                   />
                   <div className="h-[70px] bg-blue mt-[3em]">
                     <Clue active={active} />
@@ -149,18 +136,16 @@ const Game = ({ data: { main, bonus } }) => {
                 </TabPanel>
               );
             })}
-            {bonusUnlocked && (
-              <TabPanel>
-                <Bonus
-                  data={bonus}
-                  active={!gameComplete}
-                  maxScore={maxScorePlusBonus}
-                />
-                <div className="grid grid-cols-1 grid-rows-3 h-[calc(40vh-60px-70px-3em)]">
-                  <Keyboard active={!gameComplete} />
-                </div>
-              </TabPanel>
-            )}
+            <TabPanel>
+              <Solution
+                text={solution}
+                active={!gameComplete}
+                maxScore={maxScore}
+              />
+              <div className="grid grid-cols-1 grid-rows-3 h-[calc(40vh-60px-70px-3em)]">
+                <Keyboard active={!gameComplete} />
+              </div>
+            </TabPanel>
           </Tabs>
         </>
       ) : (

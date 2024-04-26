@@ -18,9 +18,14 @@ const Welcome = ({ handleReadWelcome }) => {
         score.
       </p>
       <p className="mb-5">
-        In total, there are 6 grids to fill in. Completing each one will unlock
-        the next. If your score is high enough, you will unlock a bonus stage.
-        Good luck {":)"}
+        Once a grid is complete, you will move onto another until all are
+        populated.
+        <br />
+        Note, all of the grids are shaped like letters. The letters all
+        contribute to the spelling of a common theme that binds all the
+        solutions. You can guess this at any time in the final tab. The game
+        will only complete once all of the grids and the final solution are
+        filled in correctly. Good luck {":)"}
       </p>
       <div className="flex justify-center">
         <button
